@@ -13,7 +13,7 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.static(path.join(__dirname)));
 
 // Email configuration - Replace with your email settings
-const transporter = nodemailer.createTransporter({
+const transporter = nodemailer.createTransport({
     service: 'gmail', // or your email service
     auth: {
         user: process.env.EMAIL_USER || 'your-email@gmail.com',
@@ -22,7 +22,7 @@ const transporter = nodemailer.createTransporter({
 });
 
 // Alternative configuration for other email services
-// const transporter = nodemailer.createTransporter({
+// const transporter = nodemailer.createTransport({
 //     host: 'smtp.your-provider.com',
 //     port: 587,
 //     secure: false,
