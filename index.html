@@ -189,31 +189,41 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>ACTOR RELEASE FORM</h1>
+            <h1>ACTOR RELEASE FORM FOR PROMOTIONAL VIDEOS</h1>
             <p>Electronic Signature Document</p>
         </div>
 
         <div class="contract-section">
-            <h2>CONTRACT TERMS AND CONDITIONS</h2>
+            <h2>ACTOR RELEASE FORM FOR PROMOTIONAL VIDEOS</h2>
             <div class="contract-text">
-                <p><strong>ACTOR RELEASE AND AUTHORIZATION AGREEMENT</strong></p>
+                <p>This Actor Release Form ("Release") is entered into on the date signed below between Mastermind Alliance Group, Inc,("Company") located at 1606 N Carver St, Greensburg, IN 47240-9353 ("Company Address"), and the Actor signing below.</p>
                 
-                <p>I, the undersigned, hereby grant permission to the production company, its agents, successors, and assigns (collectively "Company") to use my name, likeness, voice, and performance in connection with the production, distribution, exhibition, and exploitation of the motion picture, television program, or other audiovisual work.</p>
+                <p><strong>WHEREAS,</strong> the Company has engaged the Actor to appear and perform in eight (8) promotional video productions (collectively, the "Videos"), including one (1) introductory video titled Mastermind Alliance Intro and seven (7) additional videos, each introducing and promoting one of the "7 Pillars of Society" (collectively, the "Promotional Content"), which are to be produced and distributed by or on behalf of Mastermind Alliance Group Inc.; and</p>
                 
-                <p><strong>GRANT OF RIGHTS:</strong> I hereby grant to Company the perpetual, irrevocable, worldwide right and license to use, reproduce, distribute, display, and create derivative works from my performance, including but not limited to:</p>
+                <p><strong>WHEREAS,</strong> the Actor acknowledges receipt of full and adequate consideration for their performance in connection with the Videos, and hereby irrevocably assigns, transfers, and conveys to the Company all rights, title, and interest, including all intellectual property and publicity rights, in and to the Videos and the Promotional Content, in perpetuity and throughout the universe, for any and all uses now known or hereafter devised. The Actor further waives any and all claims to ownership, royalties, or additional compensation, and acknowledges that no further payment shall be due or payable in the future for such services or rights assigned herein.</p>
+                
+                <p><strong>NOW, THEREFORE,</strong> for good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the parties agree as follows:</p>
+                
+                <p><strong>• Grant of Rights:</strong> Actor hereby irrevocably assigns, transfers, and conveys to Company all rights, title, and interest in and to the Videos, including but not limited to Actor's performance, likeness, voice, and any other contributions therein. This grant includes all rights for commercial, advertising, business, and personal use, in perpetuity, worldwide, across all media now known or hereafter devised, including but not limited to television, internet, social media, print, and digital platforms.</p>
+                
+                <p><strong>• Scope of Use:</strong> Company shall have the unlimited right to edit, reproduce, distribute, display, perform, create derivative works from, and otherwise exploit the Videos for any purpose, including but not limited to marketing, promotion, advertising, and personal projects, without any further obligation to Actor.</p>
+                
+                <p><strong>• Release and Waiver:</strong> Actor hereby releases Company, its affiliates, successors, assigns, and licensees from any and all claims, demands, or causes of action arising out of or related to the use of the Videos, including but not limited to claims for compensation, royalties, defamation, invasion of privacy, right of publicity, or intellectual property infringement. Actor acknowledges that they hold no claim to ownership of the Videos or any derivative works created therefrom.</p>
+                
+                <p><strong>• Compensation:</strong> Actor acknowledges that they have been paid in full for their performance in the Videos and that no further compensation, monetary or otherwise, will be provided at any time in the future for their performance or for the rights granted herein.</p>
+                
+                <p><strong>• Representations and Warranties:</strong> Actor represents and warrants that:</p>
                 <ul style="margin: 10px 0 10px 20px;">
-                    <li>My physical likeness, voice, and performance</li>
-                    <li>Any interviews, behind-the-scenes footage, or promotional materials</li>
-                    <li>Use of my name and biographical information</li>
+                    <li>They are of legal age and have the full right and authority to enter into this Release.</li>
+                    <li>Their performance in the Videos does not infringe upon the rights of any third party.</li>
+                    <li>They have not granted any rights to any third party that would conflict with the rights assigned herein.</li>
                 </ul>
                 
-                <p><strong>WAIVER OF CLAIMS:</strong> I waive any right to inspect or approve the finished product or any promotional materials. I release Company from any claims arising from the use of my performance, including but not limited to claims for invasion of privacy, defamation, or violation of publicity rights.</p>
+                <p><strong>• Governing Law:</strong> This Release shall be governed by and construed in accordance with the laws of the State of Indiana. Any disputes arising under this Release shall be resolved in the courts of the State of Indiana.</p>
                 
-                <p><strong>COMPENSATION:</strong> I acknowledge that I am receiving adequate consideration for this release, whether monetary compensation or other valuable consideration.</p>
+                <p><strong>• Entire Agreement:</strong> This Release constitutes the entire agreement between the parties and supersedes all prior negotiations or agreements, whether written or oral. This Release may not be amended except in writing signed by both parties.</p>
                 
-                <p><strong>BINDING AGREEMENT:</strong> This agreement shall be binding upon my heirs, executors, administrators, and assigns. This agreement represents the entire understanding between the parties and may only be modified in writing signed by both parties.</p>
-                
-                <p>By signing below, I acknowledge that I have read, understood, and agree to be bound by the terms of this release.</p>
+                <p><strong>IN WITNESS WHEREOF,</strong> the Actor has executed this Release as of the date signed below.</p>
             </div>
         </div>
 
@@ -481,7 +491,7 @@
             // Header
             doc.setFontSize(20);
             doc.setTextColor(0, 123, 255);
-            doc.text('ACTOR RELEASE FORM', 105, 25, { align: 'center' });
+            doc.text('ACTOR RELEASE FORM FOR PROMOTIONAL VIDEOS', 105, 25, { align: 'center' });
             
             doc.setFontSize(12);
             doc.setTextColor(0, 0, 0);
@@ -490,40 +500,80 @@
             // Contract text
             doc.setFontSize(14);
             doc.setTextColor(0, 123, 255);
-            doc.text('CONTRACT TERMS AND CONDITIONS', 20, 50);
+            doc.text('ACTOR RELEASE FORM FOR PROMOTIONAL VIDEOS', 20, 50);
             
             doc.setFontSize(10);
             doc.setTextColor(0, 0, 0);
             
             const contractText = [
-                'ACTOR RELEASE AND AUTHORIZATION AGREEMENT',
+                'ACTOR RELEASE FORM FOR PROMOTIONAL VIDEOS',
                 '',
-                'I, the undersigned, hereby grant permission to the production company, its agents,',
-                'successors, and assigns (collectively "Company") to use my name, likeness, voice,',
-                'and performance in connection with the production, distribution, exhibition, and',
-                'exploitation of the motion picture, television program, or other audiovisual work.',
+                'This Actor Release Form ("Release") is entered into on the date signed below',
+                'between Mastermind Alliance Group, Inc,("Company") located at 1606 N Carver St,',
+                'Greensburg, IN 47240-9353 ("Company Address"), and the Actor signing below.',
                 '',
-                'GRANT OF RIGHTS: I hereby grant to Company the perpetual, irrevocable, worldwide',
-                'right and license to use, reproduce, distribute, display, and create derivative works',
-                'from my performance, including but not limited to:',
-                '• My physical likeness, voice, and performance',
-                '• Any interviews, behind-the-scenes footage, or promotional materials',
-                '• Use of my name and biographical information',
+                'WHEREAS, the Company has engaged the Actor to appear and perform in eight (8)',
+                'promotional video productions (collectively, the "Videos"), including one (1)',
+                'introductory video titled Mastermind Alliance Intro and seven (7) additional videos,',
+                'each introducing and promoting one of the "7 Pillars of Society" (collectively, the',
+                '"Promotional Content"), which are to be produced and distributed by or on behalf',
+                'of Mastermind Alliance Group Inc.; and',
                 '',
-                'WAIVER OF CLAIMS: I waive any right to inspect or approve the finished product or',
-                'any promotional materials. I release Company from any claims arising from the use',
-                'of my performance, including but not limited to claims for invasion of privacy,',
-                'defamation, or violation of publicity rights.',
+                'WHEREAS, the Actor acknowledges receipt of full and adequate consideration for',
+                'their performance in connection with the Videos, and hereby irrevocably assigns,',
+                'transfers, and conveys to the Company all rights, title, and interest, including all',
+                'intellectual property and publicity rights, in and to the Videos and the Promotional',
+                'Content, in perpetuity and throughout the universe, for any and all uses now known',
+                'or hereafter devised. The Actor further waives any and all claims to ownership,',
+                'royalties, or additional compensation, and acknowledges that no further payment',
+                'shall be due or payable in the future for such services or rights assigned herein.',
                 '',
-                'COMPENSATION: I acknowledge that I am receiving adequate consideration for this',
-                'release, whether monetary compensation or other valuable consideration.',
+                'NOW, THEREFORE, for good and valuable consideration, the receipt and sufficiency',
+                'of which are hereby acknowledged, the parties agree as follows:',
                 '',
-                'BINDING AGREEMENT: This agreement shall be binding upon my heirs, executors,',
-                'administrators, and assigns. This agreement represents the entire understanding',
-                'between the parties and may only be modified in writing signed by both parties.',
+                '• Grant of Rights: Actor hereby irrevocably assigns, transfers, and conveys to',
+                'Company all rights, title, and interest in and to the Videos, including but not',
+                'limited to Actor\'s performance, likeness, voice, and any other contributions therein.',
+                'This grant includes all rights for commercial, advertising, business, and personal',
+                'use, in perpetuity, worldwide, across all media now known or hereafter devised,',
+                'including but not limited to television, internet, social media, print, and digital',
+                'platforms.',
                 '',
-                'By signing below, I acknowledge that I have read, understood, and agree to be',
-                'bound by the terms of this release.'
+                '• Scope of Use: Company shall have the unlimited right to edit, reproduce,',
+                'distribute, display, perform, create derivative works from, and otherwise exploit',
+                'the Videos for any purpose, including but not limited to marketing, promotion,',
+                'advertising, and personal projects, without any further obligation to Actor.',
+                '',
+                '• Release and Waiver: Actor hereby releases Company, its affiliates, successors,',
+                'assigns, and licensees from any and all claims, demands, or causes of action',
+                'arising out of or related to the use of the Videos, including but not limited to',
+                'claims for compensation, royalties, defamation, invasion of privacy, right of',
+                'publicity, or intellectual property infringement. Actor acknowledges that they',
+                'hold no claim to ownership of the Videos or any derivative works created therefrom.',
+                '',
+                '• Compensation: Actor acknowledges that they have been paid in full for their',
+                'performance in the Videos and that no further compensation, monetary or otherwise,',
+                'will be provided at any time in the future for their performance or for the rights',
+                'granted herein.',
+                '',
+                '• Representations and Warranties: Actor represents and warrants that:',
+                '  - They are of legal age and have the full right and authority to enter into',
+                '    this Release.',
+                '  - Their performance in the Videos does not infringe upon the rights of any',
+                '    third party.',
+                '  - They have not granted any rights to any third party that would conflict with',
+                '    the rights assigned herein.',
+                '',
+                '• Governing Law: This Release shall be governed by and construed in accordance',
+                'with the laws of the State of Indiana. Any disputes arising under this Release',
+                'shall be resolved in the courts of the State of Indiana.',
+                '',
+                '• Entire Agreement: This Release constitutes the entire agreement between the',
+                'parties and supersedes all prior negotiations or agreements, whether written or',
+                'oral. This Release may not be amended except in writing signed by both parties.',
+                '',
+                'IN WITNESS WHEREOF, the Actor has executed this Release as of the date',
+                'signed below.'
             ];
             
             let yPosition = 60;

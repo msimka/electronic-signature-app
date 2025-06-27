@@ -39,7 +39,7 @@ app.post('/api/submit-document', async (req, res) => {
         console.log(`📧 Processing signature submission for ${fullName}`);
         
         // Generate filename
-        const fileName = `Actor_Release_${fullName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+        const fileName = `Mastermind_Alliance_Actor_Release_${fullName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
         
         // Convert base64 to buffer
         const pdfBuffer = Buffer.from(pdfBase64, 'base64');
@@ -48,7 +48,7 @@ app.post('/api/submit-document', async (req, res) => {
         const mailOptions = {
             from: process.env.EMAIL_USER || 'your-email@gmail.com',
             to: process.env.RECIPIENT_EMAIL || 'your-recipient@gmail.com', // Your email address
-            subject: `New Actor Release Form Submission - ${fullName}`,
+            subject: `Mastermind Alliance Actor Release - ${fullName}`,
             html: `
                 <h2>New Actor Release Form Submission</h2>
                 <p><strong>Submitted by:</strong> ${fullName}</p>
@@ -74,12 +74,12 @@ app.post('/api/submit-document', async (req, res) => {
         const confirmationMailOptions = {
             from: process.env.EMAIL_USER || 'your-email@gmail.com',
             to: email,
-            subject: 'Actor Release Form - Your Signed Copy',
+            subject: 'Mastermind Alliance Actor Release - Your Signed Copy',
             html: `
                 <h2>Your Signed Actor Release Form</h2>
                 <p>Dear ${fullName},</p>
                 
-                <p>Thank you for submitting your Actor Release Form. Your electronically signed document is attached to this email for your records.</p>
+                <p>Thank you for submitting your Mastermind Alliance Actor Release Form for Promotional Videos. Your electronically signed document is attached to this email for your records.</p>
                 
                 <p><strong>Document Details:</strong></p>
                 <ul>
