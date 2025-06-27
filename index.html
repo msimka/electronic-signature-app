@@ -278,15 +278,21 @@
             }
 
             setupCanvas() {
-                // Set canvas size to match CSS size exactly
-                this.canvas.width = 700;
-                this.canvas.height = 200;
+                // Get the actual displayed size
+                const rect = this.canvas.getBoundingClientRect();
+                
+                // Set canvas internal size to match display size
+                this.canvas.width = rect.width;
+                this.canvas.height = rect.height;
                 
                 // Set drawing style
                 this.ctx.strokeStyle = '#000';
                 this.ctx.lineWidth = 2;
                 this.ctx.lineCap = 'round';
                 this.ctx.lineJoin = 'round';
+                
+                // Clear any existing drawings
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             }
 
             bindEvents() {
@@ -304,10 +310,12 @@
 
             getEventPos(e) {
                 const rect = this.canvas.getBoundingClientRect();
+                const scaleX = this.canvas.width / rect.width;
+                const scaleY = this.canvas.height / rect.height;
                 
                 return {
-                    x: e.clientX - rect.left,
-                    y: e.clientY - rect.top
+                    x: (e.clientX - rect.left) * scaleX,
+                    y: (e.clientY - rect.top) * scaleY
                 };
             }
 
