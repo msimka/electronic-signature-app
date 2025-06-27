@@ -1,0 +1,143 @@
+const express = require('express');
+const nodemailer = require('nodemailer');
+const cors = require('cors');
+const path = require('path');
+require('dotenv').config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(cors());
+app.use(express.json({ limit: '10mb' }));
+app.use(express.static(path.join(__dirname)));
+
+// Email configuration - Replace with your email settings
+const transporter = nodemailer.createTransporter({
+    service: 'gmail', // or your email service
+    auth: {
+        user: process.env.EMAIL_USER || 'your-email@gmail.com',
+        pass: process.env.EMAIL_PASS || 'your-app-password'
+    }
+});
+
+// Alternative configuration for other email services
+// const transporter = nodemailer.createTransporter({
+//     host: 'smtp.your-provider.com',
+//     port: 587,
+//     secure: false,
+//     auth: {
+//         user: process.env.EMAIL_USER,
+//         pass: process.env.EMAIL_PASS
+//     }
+// });
+
+app.post('/api/submit-document', async (req, res) => {
+    try {
+        const { fullName, email, date, pdfBase64, timestamp } = req.body;
+        
+        console.log(`📧 Processing signature submission for ${fullName}`);
+        
+        // Generate filename
+        const fileName = `Actor_Release_${fullName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+        
+        // Convert base64 to buffer
+        const pdfBuffer = Buffer.from(pdfBase64, 'base64');
+        
+        // Email options
+        const mailOptions = {
+            from: process.env.EMAIL_USER || 'your-email@gmail.com',
+            to: process.env.RECIPIENT_EMAIL || 'your-recipient@gmail.com', // Your email address
+            subject: `New Actor Release Form Submission - ${fullName}`,
+            html: `
+                <h2>New Actor Release Form Submission</h2>
+                <p><strong>Submitted by:</strong> ${fullName}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Date:</strong> ${date}</p>
+                <p><strong>Submission Time:</strong> ${new Date(timestamp).toLocaleString()}</p>
+                
+                <p>The signed actor release form is attached as a PDF document.</p>
+                
+                <hr>
+                <p><small>This document was electronically signed and submitted via the Electronic Signature System.</small></p>
+            `,
+            attachments: [
+                {
+                    filename: fileName,
+                    content: pdfBuffer,
+                    contentType: 'application/pdf'
+                }
+            ]
+        };
+        
+        // Send confirmation email to the signer
+        const confirmationMailOptions = {
+            from: process.env.EMAIL_USER || 'your-email@gmail.com',
+            to: email,
+            subject: 'Actor Release Form - Submission Confirmation',
+            html: `
+                <h2>Document Submission Confirmation</h2>
+                <p>Dear ${fullName},</p>
+                
+                <p>Thank you for submitting your Actor Release Form. We have received your electronically signed document.</p>
+                
+                <p><strong>Submission Details:</strong></p>
+                <ul>
+                    <li>Date: ${date}</li>
+                    <li>Submission Time: ${new Date(timestamp).toLocaleString()}</li>
+                </ul>
+                
+                <p>Your signed document has been securely transmitted and will be processed accordingly.</p>
+                
+                <p>If you have any questions, please don't hesitate to contact us.</p>
+                
+                <p>Best regards,<br>
+                Production Team</p>
+                
+                <hr>
+                <p><small>This is an automated confirmation email. Please do not reply to this message.</small></p>
+            `
+        };
+        
+        // Send both emails
+        await Promise.all([
+            transporter.sendMail(mailOptions),
+            transporter.sendMail(confirmationMailOptions)
+        ]);
+        
+        console.log(`✅ Email sent successfully for ${fullName}`);
+        
+        res.json({ 
+            success: true, 
+            message: 'Document submitted successfully',
+            fileName: fileName,
+            timestamp: timestamp
+        });
+        
+    } catch (error) {
+        console.error('❌ Email sending failed:', error);
+        res.status(500).json({ 
+            success: false, 
+            message: 'Failed to submit document',
+            error: error.message 
+        });
+    }
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.json({ status: 'OK', timestamp: new Date().toISOString() });
+});
+
+// Serve the main HTML file at root
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.listen(PORT, () => {
+    console.log(`🚀 Electronic Signature Server running on port ${PORT}`);
+    console.log(`📧 Email service configured with: ${process.env.EMAIL_USER || 'default email'}`);
+    console.log(`📨 Recipient email: ${process.env.RECIPIENT_EMAIL || 'default recipient'}`);
+});
+
+module.exports = app;

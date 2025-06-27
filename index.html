@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actor Release Form - Electronic Signature</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #007bff;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .contract-section {
+            margin-bottom: 30px;
+        }
+
+        .contract-section h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .contract-text {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .signature-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 2px dashed #007bff;
+        }
+
+        .signature-canvas {
+            border: 2px solid #007bff;
+            border-radius: 4px;
+            cursor: crosshair;
+            background-color: white;
+            display: block;
+            margin: 10px auto;
+            touch-action: none;
+        }
+
+        .signature-controls {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            margin: 0 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .signature-canvas {
+                width: 100%;
+                height: 150px;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>ACTOR RELEASE FORM</h1>
+            <p>Electronic Signature Document</p>
+        </div>
+
+        <div class="contract-section">
+            <h2>CONTRACT TERMS AND CONDITIONS</h2>
+            <div class="contract-text">
+                <p><strong>ACTOR RELEASE AND AUTHORIZATION AGREEMENT</strong></p>
+                
+                <p>I, the undersigned, hereby grant permission to the production company, its agents, successors, and assigns (collectively "Company") to use my name, likeness, voice, and performance in connection with the production, distribution, exhibition, and exploitation of the motion picture, television program, or other audiovisual work.</p>
+                
+                <p><strong>GRANT OF RIGHTS:</strong> I hereby grant to Company the perpetual, irrevocable, worldwide right and license to use, reproduce, distribute, display, and create derivative works from my performance, including but not limited to:</p>
+                <ul style="margin: 10px 0 10px 20px;">
+                    <li>My physical likeness, voice, and performance</li>
+                    <li>Any interviews, behind-the-scenes footage, or promotional materials</li>
+                    <li>Use of my name and biographical information</li>
+                </ul>
+                
+                <p><strong>WAIVER OF CLAIMS:</strong> I waive any right to inspect or approve the finished product or any promotional materials. I release Company from any claims arising from the use of my performance, including but not limited to claims for invasion of privacy, defamation, or violation of publicity rights.</p>
+                
+                <p><strong>COMPENSATION:</strong> I acknowledge that I am receiving adequate consideration for this release, whether monetary compensation or other valuable consideration.</p>
+                
+                <p><strong>BINDING AGREEMENT:</strong> This agreement shall be binding upon my heirs, executors, administrators, and assigns. This agreement represents the entire understanding between the parties and may only be modified in writing signed by both parties.</p>
+                
+                <p>By signing below, I acknowledge that I have read, understood, and agree to be bound by the terms of this release.</p>
+            </div>
+        </div>
+
+        <form id="releaseForm">
+            <div class="form-group">
+                <label for="fullName">Full Legal Name <span class="required">*</span></label>
+                <input type="text" id="fullName" name="fullName" required placeholder="Enter your full legal name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date <span class="required">*</span></label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="signature-section">
+                <h2>Electronic Signature</h2>
+                <label for="signatureCanvas">Please sign below using your mouse, trackpad, or finger <span class="required">*</span></label>
+                <canvas id="signatureCanvas" class="signature-canvas" width="700" height="200"></canvas>
+                <div class="signature-controls">
+                    <button type="button" id="clearSignature" class="btn btn-secondary">Clear Signature</button>
+                    <button type="button" id="undoSignature" class="btn btn-secondary">Undo Last Stroke</button>
+                </div>
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button type="submit" id="submitForm" class="btn btn-success">Sign and Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        class SignaturePad {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.isDrawing = false;
+                this.strokes = [];
+                this.currentStroke = [];
+                
+                this.setupCanvas();
+                this.bindEvents();
+            }
+
+            setupCanvas() {
+                // Set canvas size for high DPI displays
+                const rect = this.canvas.getBoundingClientRect();
+                const dpr = window.devicePixelRatio || 1;
+                
+                this.canvas.width = rect.width * dpr;
+                this.canvas.height = rect.height * dpr;
+                
+                this.ctx.scale(dpr, dpr);
+                this.canvas.style.width = rect.width + 'px';
+                this.canvas.style.height = rect.height + 'px';
+                
+                // Set drawing style
+                this.ctx.strokeStyle = '#000';
+                this.ctx.lineWidth = 2;
+                this.ctx.lineCap = 'round';
+                this.ctx.lineJoin = 'round';
+            }
+
+            bindEvents() {
+                // Mouse events
+                this.canvas.addEventListener('mousedown', this.startDrawing.bind(this));
+                this.canvas.addEventListener('mousemove', this.draw.bind(this));
+                this.canvas.addEventListener('mouseup', this.stopDrawing.bind(this));
+                this.canvas.addEventListener('mouseout', this.stopDrawing.bind(this));
+
+                // Touch events for mobile
+                this.canvas.addEventListener('touchstart', this.handleTouch.bind(this));
+                this.canvas.addEventListener('touchmove', this.handleTouch.bind(this));
+                this.canvas.addEventListener('touchend', this.stopDrawing.bind(this));
+            }
+
+            getEventPos(e) {
+                const rect = this.canvas.getBoundingClientRect();
+                const scaleX = this.canvas.width / rect.width;
+                const scaleY = this.canvas.height / rect.height;
+                
+                return {
+                    x: (e.clientX - rect.left) * scaleX,
+                    y: (e.clientY - rect.top) * scaleY
+                };
+            }
+
+            handleTouch(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 
+                    e.type === 'touchmove' ? 'mousemove' : 'mouseup', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                
+                if (e.type === 'touchstart') this.startDrawing(mouseEvent);
+                else if (e.type === 'touchmove') this.draw(mouseEvent);
+            }
+
+            startDrawing(e) {
+                this.isDrawing = true;
+                this.currentStroke = [this.getEventPos(e)];
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.currentStroke[0].x, this.currentStroke[0].y);
+            }
+
+            draw(e) {
+                if (!this.isDrawing) return;
+                
+                const pos = this.getEventPos(e);
+                this.currentStroke.push(pos);
+                
+                this.ctx.lineTo(pos.x, pos.y);
+                this.ctx.stroke();
+            }
+
+            stopDrawing() {
+                if (this.isDrawing) {
+                    this.isDrawing = false;
+                    this.strokes.push([...this.currentStroke]);
+                    this.currentStroke = [];
+                }
+            }
+
+            clear() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.strokes = [];
+            }
+
+            undo() {
+                if (this.strokes.length > 0) {
+                    this.strokes.pop();
+                    this.redraw();
+                }
+            }
+
+            redraw() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.strokes.forEach(stroke => {
+                    if (stroke.length > 0) {
+                        this.ctx.beginPath();
+                        this.ctx.moveTo(stroke[0].x, stroke[0].y);
+                        
+                        stroke.forEach(point => {
+                            this.ctx.lineTo(point.x, point.y);
+                        });
+                        
+                        this.ctx.stroke();
+                    }
+                });
+            }
+
+            isEmpty() {
+                return this.strokes.length === 0;
+            }
+
+            getDataURL() {
+                return this.canvas.toDataURL();
+            }
+        }
+
+        // Initialize signature pad
+        const canvas = document.getElementById('signatureCanvas');
+        const signaturePad = new SignaturePad(canvas);
+
+        // Button event listeners
+        document.getElementById('clearSignature').addEventListener('click', () => {
+            signaturePad.clear();
+        });
+
+        document.getElementById('undoSignature').addEventListener('click', () => {
+            signaturePad.undo();
+        });
+
+        // Set today's date as default
+        document.getElementById('date').valueAsDate = new Date();
+
+        // Form submission
+        document.getElementById('releaseForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Hide previous messages
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            
+            // Validate form
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const date = document.getElementById('date').value;
+            
+            if (!fullName || !email || !date) {
+                errorMessage.textContent = 'Please fill in all required fields.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            if (signaturePad.isEmpty()) {
+                errorMessage.textContent = 'Please provide your signature.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            // Generate and submit PDF
+            try {
+                await submitSignedDocument(fullName, email, date, signaturePad.getDataURL());
+                successMessage.textContent = 'Document signed and submitted successfully! You will receive a confirmation email shortly.';
+                successMessage.style.display = 'block';
+                
+                // Clear the form after successful submission
+                document.getElementById('releaseForm').reset();
+                signaturePad.clear();
+            } catch (error) {
+                errorMessage.textContent = 'Error submitting document. Please try again.';
+                errorMessage.style.display = 'block';
+                console.error('Document submission error:', error);
+            }
+        });
+
+        async function submitSignedDocument(fullName, email, date, signatureDataURL) {
+            // Generate PDF
+            const pdfBase64 = await generatePDFBase64(fullName, email, date, signatureDataURL);
+            
+            // Submit to backend
+            const response = await fetch('/api/submit-document', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    fullName,
+                    email,
+                    date,
+                    signatureDataURL,
+                    pdfBase64,
+                    timestamp: new Date().toISOString()
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Submission failed: ${response.statusText}`);
+            }
+            
+            return await response.json();
+        }
+
+        async function generatePDFBase64(fullName, email, date, signatureDataURL) {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Set font
+            doc.setFont('helvetica');
+            
+            // Header
+            doc.setFontSize(20);
+            doc.setTextColor(0, 123, 255);
+            doc.text('ACTOR RELEASE FORM', 105, 25, { align: 'center' });
+            
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.text('Electronic Signature Document', 105, 35, { align: 'center' });
+            
+            // Contract text
+            doc.setFontSize(14);
+            doc.setTextColor(0, 123, 255);
+            doc.text('CONTRACT TERMS AND CONDITIONS', 20, 50);
+            
+            doc.setFontSize(10);
+            doc.setTextColor(0, 0, 0);
+            
+            const contractText = [
+                'ACTOR RELEASE AND AUTHORIZATION AGREEMENT',
+                '',
+                'I, the undersigned, hereby grant permission to the production company, its agents,',
+                'successors, and assigns (collectively "Company") to use my name, likeness, voice,',
+                'and performance in connection with the production, distribution, exhibition, and',
+                'exploitation of the motion picture, television program, or other audiovisual work.',
+                '',
+                'GRANT OF RIGHTS: I hereby grant to Company the perpetual, irrevocable, worldwide',
+                'right and license to use, reproduce, distribute, display, and create derivative works',
+                'from my performance, including but not limited to:',
+                '• My physical likeness, voice, and performance',
+                '• Any interviews, behind-the-scenes footage, or promotional materials',
+                '• Use of my name and biographical information',
+                '',
+                'WAIVER OF CLAIMS: I waive any right to inspect or approve the finished product or',
+                'any promotional materials. I release Company from any claims arising from the use',
+                'of my performance, including but not limited to claims for invasion of privacy,',
+                'defamation, or violation of publicity rights.',
+                '',
+                'COMPENSATION: I acknowledge that I am receiving adequate consideration for this',
+                'release, whether monetary compensation or other valuable consideration.',
+                '',
+                'BINDING AGREEMENT: This agreement shall be binding upon my heirs, executors,',
+                'administrators, and assigns. This agreement represents the entire understanding',
+                'between the parties and may only be modified in writing signed by both parties.',
+                '',
+                'By signing below, I acknowledge that I have read, understood, and agree to be',
+                'bound by the terms of this release.'
+            ];
+            
+            let yPosition = 60;
+            contractText.forEach(line => {
+                if (line.startsWith('ACTOR RELEASE') || line.startsWith('GRANT OF RIGHTS') || 
+                    line.startsWith('WAIVER OF CLAIMS') || line.startsWith('COMPENSATION') || 
+                    line.startsWith('BINDING AGREEMENT')) {
+                    doc.setFont('helvetica', 'bold');
+                } else {
+                    doc.setFont('helvetica', 'normal');
+                }
+                
+                doc.text(line, 20, yPosition);
+                yPosition += 5;
+                
+                if (yPosition > 270) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+            });
+            
+            // Add new page for signature section
+            doc.addPage();
+            
+            // Signature section
+            doc.setFontSize(14);
+            doc.setTextColor(0, 123, 255);
+            doc.text('SIGNATURE SECTION', 20, 30);
+            
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            
+            // Form fields
+            doc.text(`Full Name: ${fullName}`, 20, 50);
+            doc.text(`Email: ${email}`, 20, 65);
+            doc.text(`Date: ${new Date(date).toLocaleDateString()}`, 20, 80);
+            
+            // Signature
+            doc.text('Electronic Signature:', 20, 100);
+            
+            // Add signature image synchronously
+            doc.addImage(signatureDataURL, 'PNG', 20, 110, 100, 30);
+            
+            // Add timestamp
+            doc.setFontSize(8);
+            doc.setTextColor(128, 128, 128);
+            doc.text(`Document electronically signed on ${new Date().toLocaleString()}`, 20, 280);
+            
+            // Return base64 instead of saving
+            return doc.output('datauristring').split(',')[1];
+        }
+
+        // Responsive canvas resize
+        window.addEventListener('resize', () => {
+            signaturePad.setupCanvas();
+            signaturePad.redraw();
+        });
+    </script>
+</body>
+</html>
