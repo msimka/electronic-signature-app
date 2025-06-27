@@ -276,16 +276,16 @@
             }
 
             setupCanvas() {
-                // Set canvas size for high DPI displays
+                // Set canvas size properly
                 const rect = this.canvas.getBoundingClientRect();
-                const dpr = window.devicePixelRatio || 1;
                 
-                this.canvas.width = rect.width * dpr;
-                this.canvas.height = rect.height * dpr;
+                // Set actual canvas size to match display size
+                this.canvas.width = rect.width;
+                this.canvas.height = rect.height;
                 
-                this.ctx.scale(dpr, dpr);
-                this.canvas.style.width = rect.width + 'px';
-                this.canvas.style.height = rect.height + 'px';
+                // Store the scaling factors
+                this.scaleX = this.canvas.width / rect.width;
+                this.scaleY = this.canvas.height / rect.height;
                 
                 // Set drawing style
                 this.ctx.strokeStyle = '#000';
@@ -309,12 +309,10 @@
 
             getEventPos(e) {
                 const rect = this.canvas.getBoundingClientRect();
-                const scaleX = this.canvas.width / rect.width;
-                const scaleY = this.canvas.height / rect.height;
                 
                 return {
-                    x: (e.clientX - rect.left) * scaleX,
-                    y: (e.clientY - rect.top) * scaleY
+                    x: e.clientX - rect.left,
+                    y: e.clientY - rect.top
                 };
             }
 

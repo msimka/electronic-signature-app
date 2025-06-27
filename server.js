@@ -38,6 +38,23 @@ app.post('/api/submit-document', async (req, res) => {
         
         console.log(`📧 Processing signature submission for ${fullName}`);
         
+        // Validate required fields
+        if (!fullName || !email || !date || !pdfBase64) {
+            return res.status(400).json({
+                success: false,
+                message: 'Missing required fields'
+            });
+        }
+        
+        // Check email configuration
+        if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS || !process.env.RECIPIENT_EMAIL) {
+            console.error('❌ Email configuration missing');
+            return res.status(500).json({
+                success: false,
+                message: 'Email service not configured'
+            });
+        }
+        
         // Generate filename
         const fileName = `Mastermind_Alliance_Actor_Release_${fullName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
         
