@@ -102,6 +102,8 @@
             display: block;
             margin: 10px auto;
             touch-action: none;
+            width: 700px;
+            height: 200px;
         }
 
         .signature-controls {
@@ -276,16 +278,9 @@
             }
 
             setupCanvas() {
-                // Set canvas size properly
-                const rect = this.canvas.getBoundingClientRect();
-                
-                // Set actual canvas size to match display size
-                this.canvas.width = rect.width;
-                this.canvas.height = rect.height;
-                
-                // Store the scaling factors
-                this.scaleX = this.canvas.width / rect.width;
-                this.scaleY = this.canvas.height / rect.height;
+                // Set canvas size to match CSS size exactly
+                this.canvas.width = 700;
+                this.canvas.height = 200;
                 
                 // Set drawing style
                 this.ctx.strokeStyle = '#000';
@@ -446,17 +441,50 @@
                 document.getElementById('releaseForm').reset();
                 signaturePad.clear();
             } catch (error) {
-                errorMessage.textContent = 'Error submitting document. Please try again.';
-                errorMessage.style.display = 'block';
                 console.error('Document submission error:', error);
+                
+                // If email submission fails, offer local download as fallback
+                if (error.message.includes('Email service not configured') || error.message.includes('500')) {
+                    errorMessage.textContent = 'Email service not configured. Downloading PDF locally instead...';
+                    errorMessage.style.display = 'block';
+                    
+                    // Generate and download PDF locally
+                    try {
+                        const pdfBase64 = await generatePDFBase64(fullName, email, date, signaturePad.getDataURL());
+                        const pdfBlob = new Blob([Uint8Array.from(atob(pdfBase64), c => c.charCodeAt(0))], {type: 'application/pdf'});
+                        const url = URL.createObjectURL(pdfBlob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `Mastermind_Alliance_Actor_Release_${fullName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+                        a.click();
+                        URL.revokeObjectURL(url);
+                        
+                        successMessage.textContent = 'Document signed and downloaded! Please email it manually.';
+                        successMessage.style.display = 'block';
+                        errorMessage.style.display = 'none';
+                        
+                        document.getElementById('releaseForm').reset();
+                        signaturePad.clear();
+                    } catch (downloadError) {
+                        errorMessage.textContent = 'Error generating document. Please try again.';
+                    }
+                } else {
+                    errorMessage.textContent = `Error submitting document: ${error.message}`;
+                    errorMessage.style.display = 'block';
+                }
             }
         });
 
         async function submitSignedDocument(fullName, email, date, signatureDataURL) {
+            console.log('🚀 Starting document submission...');
+            
             // Generate PDF
+            console.log('📄 Generating PDF...');
             const pdfBase64 = await generatePDFBase64(fullName, email, date, signatureDataURL);
+            console.log('✅ PDF generated, length:', pdfBase64.length);
             
             // Submit to backend
+            console.log('📤 Submitting to server...');
             const response = await fetch('/api/submit-document', {
                 method: 'POST',
                 headers: {
@@ -472,11 +500,18 @@
                 })
             });
             
+            console.log('📡 Response status:', response.status);
+            console.log('📡 Response ok:', response.ok);
+            
             if (!response.ok) {
-                throw new Error(`Submission failed: ${response.statusText}`);
+                const errorText = await response.text();
+                console.error('❌ Server response:', errorText);
+                throw new Error(`Submission failed: ${response.status} - ${errorText}`);
             }
             
-            return await response.json();
+            const result = await response.json();
+            console.log('✅ Submission successful:', result);
+            return result;
         }
 
         async function generatePDFBase64(fullName, email, date, signatureDataURL) {
