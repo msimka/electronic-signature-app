@@ -129,7 +129,7 @@ This is your production electronic signature form!
 1. **Custom Domain**: Add your domain in Vercel settings (free)
 2. **Email Branding**: Customize email templates in server.js
 3. **Monitoring**: Vercel provides built-in analytics
-4. **Backups**: All signed PDFs are automatically emailed to you
+4. **Backups**: All signed PDFs are automatically emailed to both parties
 
 ---
 

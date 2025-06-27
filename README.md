@@ -7,8 +7,8 @@ A complete electronic signature solution for actor release forms with PDF email 
 - **Complete Actor Release Form Contract** - Full legal terms and conditions
 - **Electronic Signature Canvas** - Mouse, trackpad, and touch support
 - **Form Validation** - Required field validation with error messages
-- **Email Submission** - Automatically emails signed PDFs to you
-- **Confirmation Emails** - Sends confirmation to both parties
+- **Email Submission** - Automatically emails signed PDFs to you and the signer
+- **PDF Copies** - Both parties receive PDF copies for their records
 - **Mobile Responsive** - Works on desktop, tablet, and mobile devices
 - **Playwright Testing** - Automated testing for all functionality
 
@@ -46,8 +46,9 @@ A complete electronic signature solution for actor release forms with PDF email 
 2. User signs on the signature canvas using mouse/trackpad/finger
 3. User clicks "Sign and Submit"
 4. System validates all fields and signature
-5. PDF is automatically generated and emailed to you
-6. Confirmation email sent to both parties
+5. PDF is automatically generated and emailed to both parties
+6. You receive the PDF for processing
+7. Actor receives their signed copy for their records
 
 ### Technical Implementation
 - **HTML5 Canvas** for signature capture with high DPI support

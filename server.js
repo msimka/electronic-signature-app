@@ -70,33 +70,42 @@ app.post('/api/submit-document', async (req, res) => {
             ]
         };
         
-        // Send confirmation email to the signer
+        // Send confirmation email to the signer WITH PDF copy
         const confirmationMailOptions = {
             from: process.env.EMAIL_USER || 'your-email@gmail.com',
             to: email,
-            subject: 'Actor Release Form - Submission Confirmation',
+            subject: 'Actor Release Form - Your Signed Copy',
             html: `
-                <h2>Document Submission Confirmation</h2>
+                <h2>Your Signed Actor Release Form</h2>
                 <p>Dear ${fullName},</p>
                 
-                <p>Thank you for submitting your Actor Release Form. We have received your electronically signed document.</p>
+                <p>Thank you for submitting your Actor Release Form. Your electronically signed document is attached to this email for your records.</p>
                 
-                <p><strong>Submission Details:</strong></p>
+                <p><strong>Document Details:</strong></p>
                 <ul>
-                    <li>Date: ${date}</li>
+                    <li>Full Name: ${fullName}</li>
+                    <li>Email: ${email}</li>
+                    <li>Date Signed: ${date}</li>
                     <li>Submission Time: ${new Date(timestamp).toLocaleString()}</li>
                 </ul>
                 
-                <p>Your signed document has been securely transmitted and will be processed accordingly.</p>
+                <p><strong>Important:</strong> Please save this PDF copy for your records. This document serves as proof of your agreement to the terms outlined in the Actor Release Form.</p>
                 
-                <p>If you have any questions, please don't hesitate to contact us.</p>
+                <p>If you have any questions about this document or the production, please don't hesitate to contact us.</p>
                 
                 <p>Best regards,<br>
                 Production Team</p>
                 
                 <hr>
-                <p><small>This is an automated confirmation email. Please do not reply to this message.</small></p>
-            `
+                <p><small>This is an automated email containing your signed legal document. Please keep this email and attachment for your records.</small></p>
+            `,
+            attachments: [
+                {
+                    filename: fileName,
+                    content: pdfBuffer,
+                    contentType: 'application/pdf'
+                }
+            ]
         };
         
         // Send both emails
