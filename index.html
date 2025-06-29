@@ -481,29 +481,40 @@
                     yPos += 6;
                 });
                 
-                // Add new page for signature
-                doc.addPage();
+                // Add signature section on same page if room, otherwise new page
+                if (yPos > 180) {
+                    doc.addPage();
+                    yPos = 30;
+                } else {
+                    yPos += 20; // Add some space before signature section
+                }
                 
                 doc.setFontSize(14);
                 doc.setTextColor(0, 123, 255);
-                doc.text('SIGNATURE SECTION', 20, 30);
+                doc.text('SIGNATURE SECTION', 20, yPos);
                 
                 doc.setFontSize(12);
                 doc.setTextColor(0, 0, 0);
                 
-                doc.text(`Full Name: ${fullName}`, 20, 50);
-                doc.text(`Email: ${email}`, 20, 65);
-                doc.text(`Date: ${new Date(date).toLocaleDateString()}`, 20, 80);
+                yPos += 20;
+                doc.text(`Full Name: ${fullName}`, 20, yPos);
+                yPos += 15;
+                doc.text(`Email: ${email}`, 20, yPos);
+                yPos += 15;
+                doc.text(`Date: ${new Date(date).toLocaleDateString()}`, 20, yPos);
                 
-                doc.text('Electronic Signature:', 20, 100);
+                yPos += 20;
+                doc.text('Electronic Signature:', 20, yPos);
                 
+                yPos += 10;
                 // Add signature
-                doc.addImage(signaturePad.getDataURL(), 'PNG', 20, 110, 100, 30);
+                doc.addImage(signaturePad.getDataURL(), 'PNG', 20, yPos, 100, 30);
                 
                 // Add timestamp
+                yPos += 40;
                 doc.setFontSize(8);
                 doc.setTextColor(128, 128, 128);
-                doc.text(`Document electronically signed on ${new Date().toLocaleString()}`, 20, 280);
+                doc.text(`Document electronically signed on ${new Date().toLocaleString()}`, 20, yPos);
                 
                 // Get PDF as base64
                 const pdfBase64 = doc.output('datauristring').split(',')[1];
