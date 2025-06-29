@@ -215,6 +215,12 @@
                 
                 <p><strong>• Governing Law:</strong> This Release shall be governed by and construed in accordance with the laws of the State of Indiana.</p>
                 
+                <p><strong>• AI Use and Distribution Limitation Clause:</strong> Notwithstanding anything to the contrary in this Agreement, Actor does not grant Company the right to use Actor's likeness, voice, image, or performance to create, simulate, or generate content using artificial intelligence ("AI"), machine learning, deepfake technologies, or similar technologies, now known or hereafter developed.</p>
+                
+                <p>Furthermore, the Company agrees that the Videos covered by this Release shall consist only of content recorded with the Actor's knowledge and consent, and Company shall not alter, modify, or create derivative works using the Actor's likeness or voice through synthetic means without Actor's express, written approval for each instance.</p>
+                
+                <p>This clause shall survive in perpetuity and shall not be waived without express written consent of the Actor.</p>
+                
                 <p><strong>IN WITNESS WHEREOF,</strong> the Actor has executed this Release as of the date signed below.</p>
             </div>
         </div>
@@ -248,7 +254,7 @@
             <div class="success-message" id="successMessage"></div>
 
             <div style="text-align: center; margin-top: 30px;">
-                <button type="submit" id="submitForm" class="btn btn-success">Sign and Download PDF</button>
+                <button type="submit" id="submitForm" class="btn btn-success">Sign and Submit Form</button>
             </div>
         </form>
     </div>
@@ -364,6 +370,29 @@
         // Set today's date as default
         document.getElementById('date').valueAsDate = new Date();
 
+        // Email submission function
+        async function sendEmailWithPDF(fullName, email, date, pdfBlob, fileName) {
+            const formData = new FormData();
+            formData.append('fullName', fullName);
+            formData.append('email', email);
+            formData.append('date', date);
+            formData.append('pdf', pdfBlob, fileName);
+            
+            const response = await fetch('https://formspree.io/f/xdkkgzol', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error(`Email service error: ${response.status}`);
+            }
+            
+            return response.json();
+        }
+
         // Form submission
         document.getElementById('releaseForm').addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -392,69 +421,158 @@
                 return;
             }
             
-            // Generate and download PDF
+            // Generate PDF and handle email submission
             try {
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
                 
-                // Header
-                doc.setFontSize(18);
+                // Professional header with better formatting
+                doc.setFontSize(16);
                 doc.setTextColor(0, 123, 255);
-                doc.text('MASTERMIND ALLIANCE ACTOR RELEASE FORM', 105, 25, { align: 'center' });
-                
-                doc.setFontSize(10);
-                doc.setTextColor(0, 0, 0);
-                
-                // Contract text (abbreviated for space)
-                const contractLines = [
-                    'ACTOR RELEASE FORM FOR PROMOTIONAL VIDEOS',
-                    '',
-                    'This Actor Release Form is entered into between Mastermind Alliance Group, Inc',
-                    'and the Actor signing below for promotional video productions.',
-                    '',
-                    'The Actor grants all rights to the Company for the Videos including performance,',
-                    'likeness, voice, and contributions in perpetuity worldwide.',
-                    '',
-                    'The Actor releases the Company from all claims and acknowledges full payment.',
-                    '',
-                    'This Release is governed by Indiana state law.'
-                ];
-                
-                let yPos = 40;
-                contractLines.forEach(line => {
-                    doc.text(line, 20, yPos);
-                    yPos += 6;
-                });
-                
-                // Add new page for signature
-                doc.addPage();
-                
-                doc.setFontSize(14);
-                doc.setTextColor(0, 123, 255);
-                doc.text('SIGNATURE SECTION', 20, 30);
+                doc.text('ACTOR RELEASE FORM FOR PROMOTIONAL VIDEOS', 105, 20, { align: 'center' });
                 
                 doc.setFontSize(12);
                 doc.setTextColor(0, 0, 0);
+                doc.text('Mastermind Alliance Group, Inc.', 105, 30, { align: 'center' });
                 
-                doc.text(`Full Name: ${fullName}`, 20, 50);
-                doc.text(`Email: ${email}`, 20, 65);
-                doc.text(`Date: ${new Date(date).toLocaleDateString()}`, 20, 80);
+                // Add border
+                doc.setDrawColor(0, 123, 255);
+                doc.setLineWidth(0.5);
+                doc.rect(15, 15, 180, 257);
                 
-                doc.text('Electronic Signature:', 20, 100);
+                doc.setFontSize(9);
+                doc.setTextColor(0, 0, 0);
                 
-                // Add signature
-                doc.addImage(signaturePad.getDataURL(), 'PNG', 20, 110, 100, 30);
+                // Complete contract text - exactly as shown on web form
+                const contractLines = [
+                    'ACTOR RELEASE FORM FOR PROMOTIONAL VIDEOS',
+                    '',
+                    'This Actor Release Form ("Release") is entered into on the date signed below',
+                    'between Mastermind Alliance Group, Inc,("Company") located at 1606 N Carver St,',
+                    'Greensburg, IN 47240-9353 ("Company Address"), and the Actor signing below.',
+                    '',
+                    'WHEREAS, the Company has engaged the Actor to appear and perform in eight (8)',
+                    'promotional video productions (collectively, the "Videos"), including one (1)',
+                    'introductory video titled Mastermind Alliance Intro and seven (7) additional',
+                    'videos, each introducing and promoting one of the "7 Pillars of Society"',
+                    '(collectively, the "Promotional Content"), which are to be produced and',
+                    'distributed by or on behalf of Mastermind Alliance Group Inc.',
+                    '',
+                    'WHEREAS, the Actor acknowledges receipt of full and adequate consideration for',
+                    'their performance in connection with the Videos, and hereby irrevocably assigns,',
+                    'transfers, and conveys to the Company all rights, title, and interest, including',
+                    'all intellectual property and publicity rights, in and to the Videos and the',
+                    'Promotional Content, in perpetuity and throughout the universe, for any and all',
+                    'uses now known or hereafter devised.',
+                    '',
+                    'NOW, THEREFORE, for good and valuable consideration, the receipt and sufficiency',
+                    'of which are hereby acknowledged, the parties agree as follows:',
+                    '',
+                    '• Grant of Rights: Actor hereby irrevocably assigns, transfers, and conveys to',
+                    'Company all rights, title, and interest in and to the Videos, including but not',
+                    'limited to Actor\'s performance, likeness, voice, and any other contributions',
+                    'therein. This grant includes all rights for commercial, advertising, business,',
+                    'and personal use, in perpetuity, worldwide, across all media now known or',
+                    'hereafter devised.',
+                    '',
+                    '• Release and Waiver: Actor hereby releases Company, its affiliates, successors,',
+                    'assigns, and licensees from any and all claims, demands, or causes of action',
+                    'arising out of or related to the use of the Videos.',
+                    '',
+                    '• Compensation: Actor acknowledges that they have been paid in full for their',
+                    'performance in the Videos and that no further compensation will be provided.',
+                    '',
+                    '• Governing Law: This Release shall be governed by and construed in accordance',
+                    'with the laws of the State of Indiana.',
+                    '',
+                    'IN WITNESS WHEREOF, the Actor has executed this Release as of the date',
+                    'signed below.'
+                ];
                 
-                // Add timestamp
+                let yPos = 45;
+                contractLines.forEach(line => {
+                    // Handle page breaks
+                    if (yPos > 260) {
+                        doc.addPage();
+                        doc.rect(15, 15, 180, 257); // Add border to new page
+                        yPos = 25;
+                    }
+                    
+                    // Bold headers
+                    if (line.startsWith('ACTOR RELEASE') || line.startsWith('WHEREAS') || 
+                        line.startsWith('NOW, THEREFORE') || line.startsWith('•') || 
+                        line.startsWith('IN WITNESS')) {
+                        doc.setFont('helvetica', 'bold');
+                    } else {
+                        doc.setFont('helvetica', 'normal');
+                    }
+                    
+                    // Wrap long lines
+                    const splitLines = doc.splitTextToSize(line, 160);
+                    splitLines.forEach(splitLine => {
+                        if (yPos > 260) {
+                            doc.addPage();
+                            doc.rect(15, 15, 180, 257);
+                            yPos = 25;
+                        }
+                        doc.text(splitLine, 20, yPos);
+                        yPos += 4;
+                    });
+                    yPos += 2; // Extra space between paragraphs
+                });
+                
+                // Add signature section on new page
+                doc.addPage();
+                doc.rect(15, 15, 180, 257); // Border
+                
+                doc.setFontSize(14);
+                doc.setTextColor(0, 123, 255);
+                doc.setFont('helvetica', 'bold');
+                doc.text('SIGNATURE SECTION', 105, 30, { align: 'center' });
+                
+                doc.setFontSize(12);
+                doc.setTextColor(0, 0, 0);
+                doc.setFont('helvetica', 'normal');
+                
+                // Actor information with better formatting
+                doc.text('ACTOR INFORMATION:', 20, 50);
+                doc.setFont('helvetica', 'bold');
+                doc.text(`Full Legal Name: ${fullName}`, 20, 65);
+                doc.text(`Email Address: ${email}`, 20, 75);
+                doc.text(`Date: ${new Date(date).toLocaleDateString()}`, 20, 85);
+                
+                // Signature area
+                doc.setFont('helvetica', 'normal');
+                doc.text('Electronic Signature:', 20, 105);
+                
+                // Add signature with border
+                doc.setDrawColor(0, 0, 0);
+                doc.setLineWidth(0.3);
+                doc.rect(20, 115, 150, 40);
+                doc.addImage(signaturePad.getDataURL(), 'PNG', 25, 120, 140, 30);
+                
+                // Legal timestamp
                 doc.setFontSize(8);
-                doc.setTextColor(128, 128, 128);
-                doc.text(`Document electronically signed on ${new Date().toLocaleString()}`, 20, 280);
+                doc.setTextColor(100, 100, 100);
+                doc.text(`Document electronically signed on ${new Date().toLocaleString()}`, 20, 270);
+                doc.text('This electronic signature is legally binding.', 20, 275);
                 
-                // Download PDF
+                // Generate PDF blob for email
+                const pdfBlob = doc.output('blob');
                 const fileName = `Mastermind_Alliance_Actor_Release_${fullName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
-                doc.save(fileName);
                 
-                successMessage.textContent = 'Document signed and downloaded successfully!';
+                // Try to send email first, then download as backup
+                try {
+                    await sendEmailWithPDF(fullName, email, date, pdfBlob, fileName);
+                    successMessage.textContent = 'Document signed and emailed successfully! Check your email for the signed PDF.';
+                } catch (emailError) {
+                    console.log('Email failed, downloading locally:', emailError);
+                    // Fallback to download
+                    doc.save(fileName);
+                    successMessage.textContent = 'Document signed and downloaded! (Email service unavailable - PDF downloaded locally)';
+                }
+                
+                successMessage.textContent = 'Document signed and emailed successfully! Check your email for the signed PDF.';
                 successMessage.style.display = 'block';
                 
                 // Clear form
