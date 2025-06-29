@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mastermind Alliance Actor Release Form</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 20px;
+        }
+
+        .header h1 {
+            color: #007bff;
+            font-size: 2.2em;
+            margin-bottom: 10px;
+        }
+
+        .contract-section {
+            margin-bottom: 30px;
+        }
+
+        .contract-section h2 {
+            color: #007bff;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .contract-text {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-left: 4px solid #007bff;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+            line-height: 1.7;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .signature-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border: 2px dashed #007bff;
+        }
+
+        .signature-canvas {
+            border: 2px solid #007bff;
+            border-radius: 4px;
+            cursor: crosshair;
+            background-color: white;
+            display: block;
+            margin: 10px auto;
+            touch-action: none;
+            width: 100%;
+            max-width: 700px;
+            height: 200px;
+        }
+
+        .signature-controls {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            margin: 0 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #545b62;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            color: white;
+            font-size: 18px;
+            padding: 15px 30px;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-weight: 600;
+            margin-top: 10px;
+            display: none;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .signature-canvas {
+                width: 100%;
+                height: 150px;
+            }
+            
+            .btn {
+                display: block;
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>MASTERMIND ALLIANCE ACTOR RELEASE FORM</h1>
+            <p>Electronic Signature Document</p>
+        </div>
+
+        <div class="contract-section">
+            <h2>ACTOR RELEASE FORM FOR PROMOTIONAL VIDEOS</h2>
+            <div class="contract-text">
+                <p>This Actor Release Form ("Release") is entered into on the date signed below between Mastermind Alliance Group, Inc,("Company") located at 1606 N Carver St, Greensburg, IN 47240-9353 ("Company Address"), and the Actor signing below.</p>
+                
+                <p><strong>WHEREAS,</strong> the Company has engaged the Actor to appear and perform in eight (8) promotional video productions (collectively, the "Videos"), including one (1) introductory video titled Mastermind Alliance Intro and seven (7) additional videos, each introducing and promoting one of the "7 Pillars of Society" (collectively, the "Promotional Content"), which are to be produced and distributed by or on behalf of Mastermind Alliance Group Inc.</p>
+                
+                <p><strong>WHEREAS,</strong> the Actor acknowledges receipt of full and adequate consideration for their performance in connection with the Videos, and hereby irrevocably assigns, transfers, and conveys to the Company all rights, title, and interest, including all intellectual property and publicity rights, in and to the Videos and the Promotional Content, in perpetuity and throughout the universe, for any and all uses now known or hereafter devised.</p>
+                
+                <p><strong>NOW, THEREFORE,</strong> for good and valuable consideration, the receipt and sufficiency of which are hereby acknowledged, the parties agree as follows:</p>
+                
+                <p><strong>• Grant of Rights:</strong> Actor hereby irrevocably assigns, transfers, and conveys to Company all rights, title, and interest in and to the Videos, including but not limited to Actor's performance, likeness, voice, and any other contributions therein. This grant includes all rights for commercial, advertising, business, and personal use, in perpetuity, worldwide, across all media now known or hereafter devised.</p>
+                
+                <p><strong>• Release and Waiver:</strong> Actor hereby releases Company, its affiliates, successors, assigns, and licensees from any and all claims, demands, or causes of action arising out of or related to the use of the Videos.</p>
+                
+                <p><strong>• Compensation:</strong> Actor acknowledges that they have been paid in full for their performance in the Videos and that no further compensation will be provided.</p>
+                
+                <p><strong>• Governing Law:</strong> This Release shall be governed by and construed in accordance with the laws of the State of Indiana.</p>
+                
+                <p><strong>• AI Use and Distribution Limitation Clause:</strong> Notwithstanding anything to the contrary in this Agreement, Actor does not grant Company the right to use Actor's likeness, voice, image, or performance to create, simulate, or generate content using artificial intelligence ("AI"), machine learning, deepfake technologies, or similar technologies, now known or hereafter developed.</p>
+                
+                <p>Furthermore, the Company agrees that the Videos covered by this Release shall consist only of content recorded with the Actor's knowledge and consent, and Company shall not alter, modify, or create derivative works using the Actor's likeness or voice through synthetic means without Actor's express, written approval for each instance.</p>
+                
+                <p>This clause shall survive in perpetuity and shall not be waived without express written consent of the Actor.</p>
+                
+                <p><strong>IN WITNESS WHEREOF,</strong> the Actor has executed this Release as of the date signed below.</p>
+            </div>
+        </div>
+
+        <form id="releaseForm">
+            <div class="form-group">
+                <label for="fullName">Full Legal Name <span class="required">*</span></label>
+                <input type="text" id="fullName" name="fullName" required placeholder="Enter your full legal name">
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email address">
+            </div>
+
+            <div class="form-group">
+                <label for="date">Date <span class="required">*</span></label>
+                <input type="date" id="date" name="date" required>
+            </div>
+
+            <div class="signature-section">
+                <h2>Electronic Signature</h2>
+                <label for="signatureCanvas">Please sign below using your mouse, trackpad, or finger <span class="required">*</span></label>
+                <canvas id="signatureCanvas" class="signature-canvas"></canvas>
+                <div class="signature-controls">
+                    <button type="button" id="clearSignature" class="btn btn-secondary">Clear Signature</button>
+                </div>
+            </div>
+
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <div style="text-align: center; margin-top: 30px;">
+                <button type="submit" id="submitForm" class="btn btn-success">Sign and Download PDF</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        class SignaturePad {
+            constructor(canvas) {
+                this.canvas = canvas;
+                this.ctx = canvas.getContext('2d');
+                this.isDrawing = false;
+                this.strokes = [];
+                this.currentStroke = [];
+                
+                this.setupCanvas();
+                this.bindEvents();
+            }
+
+            setupCanvas() {
+                // Get actual container width
+                const rect = this.canvas.getBoundingClientRect();
+                this.canvas.width = rect.width;
+                this.canvas.height = rect.height;
+                
+                // Set drawing style
+                this.ctx.strokeStyle = '#000';
+                this.ctx.lineWidth = 3;
+                this.ctx.lineCap = 'round';
+                this.ctx.lineJoin = 'round';
+            }
+
+            bindEvents() {
+                // Mouse events
+                this.canvas.addEventListener('mousedown', this.startDrawing.bind(this));
+                this.canvas.addEventListener('mousemove', this.draw.bind(this));
+                this.canvas.addEventListener('mouseup', this.stopDrawing.bind(this));
+                this.canvas.addEventListener('mouseout', this.stopDrawing.bind(this));
+
+                // Touch events for mobile
+                this.canvas.addEventListener('touchstart', this.handleTouch.bind(this));
+                this.canvas.addEventListener('touchmove', this.handleTouch.bind(this));
+                this.canvas.addEventListener('touchend', this.stopDrawing.bind(this));
+            }
+
+            getEventPos(e) {
+                const rect = this.canvas.getBoundingClientRect();
+                return {
+                    x: (e.clientX - rect.left) * (this.canvas.width / rect.width),
+                    y: (e.clientY - rect.top) * (this.canvas.height / rect.height)
+                };
+            }
+
+            handleTouch(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                const mouseEvent = new MouseEvent(e.type === 'touchstart' ? 'mousedown' : 
+                    e.type === 'touchmove' ? 'mousemove' : 'mouseup', {
+                    clientX: touch.clientX,
+                    clientY: touch.clientY
+                });
+                
+                if (e.type === 'touchstart') this.startDrawing(mouseEvent);
+                else if (e.type === 'touchmove') this.draw(mouseEvent);
+            }
+
+            startDrawing(e) {
+                this.isDrawing = true;
+                this.currentStroke = [this.getEventPos(e)];
+                this.ctx.beginPath();
+                this.ctx.moveTo(this.currentStroke[0].x, this.currentStroke[0].y);
+            }
+
+            draw(e) {
+                if (!this.isDrawing) return;
+                
+                const pos = this.getEventPos(e);
+                this.currentStroke.push(pos);
+                
+                this.ctx.lineTo(pos.x, pos.y);
+                this.ctx.stroke();
+            }
+
+            stopDrawing() {
+                if (this.isDrawing) {
+                    this.isDrawing = false;
+                    this.strokes.push([...this.currentStroke]);
+                    this.currentStroke = [];
+                }
+            }
+
+            clear() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                this.strokes = [];
+            }
+
+            isEmpty() {
+                return this.strokes.length === 0;
+            }
+
+            getDataURL() {
+                return this.canvas.toDataURL();
+            }
+        }
+
+        // Initialize signature pad
+        const canvas = document.getElementById('signatureCanvas');
+        const signaturePad = new SignaturePad(canvas);
+
+        // Button event listeners
+        document.getElementById('clearSignature').addEventListener('click', () => {
+            signaturePad.clear();
+        });
+
+        // Set today's date as default
+        document.getElementById('date').valueAsDate = new Date();
+
+        // Form submission
+        document.getElementById('releaseForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Hide previous messages
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            
+            // Validate form
+            const fullName = document.getElementById('fullName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const date = document.getElementById('date').value;
+            
+            if (!fullName || !email || !date) {
+                errorMessage.textContent = 'Please fill in all required fields.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            if (signaturePad.isEmpty()) {
+                errorMessage.textContent = 'Please provide your signature.';
+                errorMessage.style.display = 'block';
+                return;
+            }
+            
+            // Generate and download PDF
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Header
+                doc.setFontSize(18);
+                doc.setTextColor(0, 123, 255);
+                doc.text('MASTERMIND ALLIANCE ACTOR RELEASE FORM', 105, 25, { align: 'center' });
+                
+                doc.setFontSize(10);
+                doc.setTextColor(0, 0, 0);
+                
+                // Contract text (abbreviated for space)
+                const contractLines = [
+                    'ACTOR RELEASE FORM FOR PROMOTIONAL VIDEOS',
+                    '',
+                    'This Actor Release Form is entered into between Mastermind Alliance Group, Inc',
+                    'and the Actor signing below for promotional video productions.',
+                    '',
+                    'The Actor grants all rights to the Company for the Videos including performance,',
+                    'likeness, voice, and contributions in perpetuity worldwide.',
+                    '',
+                    'The Actor releases the Company from all claims and acknowledges full payment.',
+                    '',
+                    'This Release is governed by Indiana state law.'
+                ];
+                
+                let yPos = 40;
+                contractLines.forEach(line => {
+                    doc.text(line, 20, yPos);
+                    yPos += 6;
+                });
+                
+                // Add new page for signature
+                doc.addPage();
+                
+                doc.setFontSize(14);
+                doc.setTextColor(0, 123, 255);
+                doc.text('SIGNATURE SECTION', 20, 30);
+                
+                doc.setFontSize(12);
+                doc.setTextColor(0, 0, 0);
+                
+                doc.text(`Full Name: ${fullName}`, 20, 50);
+                doc.text(`Email: ${email}`, 20, 65);
+                doc.text(`Date: ${new Date(date).toLocaleDateString()}`, 20, 80);
+                
+                doc.text('Electronic Signature:', 20, 100);
+                
+                // Add signature
+                doc.addImage(signaturePad.getDataURL(), 'PNG', 20, 110, 100, 30);
+                
+                // Add timestamp
+                doc.setFontSize(8);
+                doc.setTextColor(128, 128, 128);
+                doc.text(`Document electronically signed on ${new Date().toLocaleString()}`, 20, 280);
+                
+                // Download PDF
+                const fileName = `Mastermind_Alliance_Actor_Release_${fullName.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`;
+                doc.save(fileName);
+                
+                successMessage.textContent = 'Document signed and downloaded successfully!';
+                successMessage.style.display = 'block';
+                
+                // Clear form
+                document.getElementById('releaseForm').reset();
+                signaturePad.clear();
+                document.getElementById('date').valueAsDate = new Date();
+                
+            } catch (error) {
+                errorMessage.textContent = 'Error generating PDF. Please try again.';
+                errorMessage.style.display = 'block';
+                console.error('PDF error:', error);
+            }
+        });
+
+        // Responsive canvas resize
+        window.addEventListener('resize', () => {
+            signaturePad.setupCanvas();
+        });
+    </script>
+</body>
+</html>
